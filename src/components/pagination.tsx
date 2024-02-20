@@ -5,53 +5,49 @@ import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger } from './ui/select';
 
 interface PaginationProps {
-    pages?: number;
-    items?: number;
-    page?: number;
+    pages: number;
+    items: number;
+    page: number;
 }
 
 export function Pagination({ items, page, pages }: PaginationProps) {
     const [, setSearchParams] = useSearchParams();
 
-    function firstPage() {
+    const firstPage = () => {
         setSearchParams(params => {
             params.set('page', '1');
 
             return params;
         });
-    }
+    };
 
-    function previousPage() {
-        if (page - 1 <= 0) {
-            return;
-        }
+    const previousPage = () => {
+        if (page - 1 <= 0) return;
 
         setSearchParams(params => {
             params.set('page', String(page - 1));
 
             return params;
         });
-    }
+    };
 
-    function nextPage() {
-        if (page + 1 > pages) {
-            return;
-        }
+    const nextPage = () => {
+        if (page + 1 > pages) return;
 
         setSearchParams(params => {
             params.set('page', String(page + 1));
 
             return params;
         });
-    }
+    };
 
-    function lastPage() {
+    const lastPage = () => {
         setSearchParams(params => {
             params.set('page', String(pages));
 
             return params;
         });
-    }
+    };
 
     return (
         <div className="flex text-sm items-center justify-between text-zinc-500">
